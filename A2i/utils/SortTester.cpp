@@ -32,25 +32,23 @@ template<typename Func, typename... Args>
 void SortTester::ProcessSort(std::vector<int>& generated_nums, Func func) {
   std::vector<std::pair<int, double>> measurements;
   for (int sub_size = 500; sub_size <= 10000; sub_size += 100) {
-    auto sub_nums = ArrayGenerator::GetSubArray(generated_nums, sub_size);
-    double average_sort = ProcessTime(func, sub_nums.begin(), sub_nums.end());
-    measurements.emplace_back(sub_size, average_sort);
+    double sum = 0;
+    for (int i = 0; i < _measurements_count; ++i) {
+      auto sub_nums = ArrayGenerator::GetSubArray(generated_nums, sub_size);
+      sum += ProcessTime(func, sub_nums.begin(), sub_nums.end());
+    }
+    double average_time = sum / _measurements_count;
+    measurements.emplace_back(sub_size, average_time);
   }
   Out(measurements);
 }
 
 template<typename Func, typename... Args>
 double SortTester::ProcessTime(Func func, Args &&... args) {
-  double sum = 0;
-
-  for (int i = 0; i < _measurements_count; ++i) {
-    auto start = std::chrono::high_resolution_clock::now();
-    func(std::forward<Args>(args)...);
-    auto elapsed = std::chrono::high_resolution_clock::now() - start;
-    sum += (double)std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count();
-  }
-
-  return sum / _measurements_count;
+  auto start = std::chrono::high_resolution_clock::now();
+  func(std::forward<Args>(args)...);
+  auto elapsed = std::chrono::high_resolution_clock::now() - start;
+  return (double)std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count();
 }
 
 void SortTester::Out(std::vector<std::pair<int, double>>& measurements) {
