@@ -35,7 +35,7 @@ def main():
     for i, item in enumerate(contents):
         view(item, ax, colors[i])
     
-    ax.set_title('Сравнение MergeSort и оптимизированного MergeSort (почти отсортированный массив, кол-во перестановок = 7)')
+    ax.set_title('Сравнение MergeSort и оптимизированного MergeSort (почти отсортированный массив)')
     ax.set_xlabel('Длина сортируемого массива')
     ax.set_ylabel('Время, затраченное на сортировку (мс)')
     ax.grid(True)
