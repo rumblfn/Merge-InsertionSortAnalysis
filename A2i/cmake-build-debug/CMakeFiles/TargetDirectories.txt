@@ -1,0 +1,3 @@
+/Users/samilvaliahmetov/Documents/hse/C++/C3/A2i/cmake-build-debug/CMakeFiles/A2i.dir
+/Users/samilvaliahmetov/Documents/hse/C++/C3/A2i/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/samilvaliahmetov/Documents/hse/C++/C3/A2i/cmake-build-debug/CMakeFiles/rebuild_cache.dir
